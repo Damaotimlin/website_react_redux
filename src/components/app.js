@@ -35,7 +35,7 @@ export class App extends Component {
       	<Header 
       		authenticated={this.props.auth.authenticated} 
       		signOut={this.props.signOut} />
-      	<h1>Kagufarm Firebase React Node</h1>
+      	<h1>Welcome to Dayeasier. ！網站架構中！</h1>
       	<main className="main">{this.props.children}</main>
       </div>
     );
