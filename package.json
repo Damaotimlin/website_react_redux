@@ -7,8 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch",
-
+    "test:watch": "npm run test -- --watch"
   },
   "author": "YuTing Lin",
   "license": "ISC",
