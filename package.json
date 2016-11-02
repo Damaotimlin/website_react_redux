@@ -1,13 +1,14 @@
 {
-  "name": "Kagufarm-server",
+  "name": "dayeasier_website",
   "version": "0.1.0",
-  "description": "Kagufarm website build by React + Firebase",
+  "description": "Dayeasier website build by React host in NAS",
   "main": "index.js",
-  "repository": "git@59.126.201.136/volume1/github/Kagufarm-Firebase-React-Node/",
+  "repository": "git@59.126.201.136/volume1/github/dayeasier_website_react_node/",
   "scripts": {
     "start": "node server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
-    "test:watch": "npm run test -- --watch"
+    "test:watch": "npm run test -- --watch",
+
   },
   "author": "YuTing Lin",
   "license": "ISC",
