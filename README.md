@@ -1,4 +1,4 @@
-# Kagufarm Firebase React Node
+# Dayeasier Website React Node
 
 ###File Structure###
 
@@ -49,5 +49,5 @@
 ####Personal Git#####
 Git repository
 ```
-	> git clone ssh://git@59.126.201.136/volume1/github/Kagufarm-Firebase-React-Node/
+	> git clone ssh://git@59.126.201.136/volume1/github/dayeasier_website_react_node/
 ```
