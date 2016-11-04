@@ -34,7 +34,6 @@
     "dotenv": "^2.0.0",
     "firebase": "^3.5.2",
     "lodash": "^4.16.4",
-    "node-sass": "^3.11.1",
     "react": "^15.3.2",
     "react-dom": "^15.3.2",
     "react-redux": "^4.0.0",
