@@ -10,21 +10,21 @@ console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`)
 if (process.env.NODE_ENV === 'production') {
 	return new WebpackDevServer(webpack(productionConfig), {
 				publicPath: productionConfig.output.publicPath,
-			}).listen(8080, '0.0.0.0', function (err, res){
+			}).listen(3000, '0.0.0.0', function (err, res){
 				if (err){
 					return console.log(err);
 				}
-				console.log(`Server ${process.env.NODE_ENV} listening at http://0.0.0.0:8080`)
+				console.log(`Server ${process.env.NODE_ENV} listening at http://0.0.0.0:3000`)
 			});
 	} else {
 		return new WebpackDevServer(webpack(developerConfig), {
 			publicPath: developerConfig.output.publicPath,
 			hot: true,
 			historyApiFallback: true
-		}).listen(3000, '0.0.0.0', function (err, result){
+		}).listen(8085, '0.0.0.0', function (err, result){
 			if (err){
 				return console.log(err);
 			}
-			console.log('react-hot-loader Listening at http://0.0.0.0:3000/');
+			console.log('react-hot-loader Listening at http://0.0.0.0:8085/');
 		});
 }
