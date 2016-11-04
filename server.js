@@ -2,29 +2,25 @@
 var webpack = require('webpack');
 var dotenv = require('dotenv').config();
 var WebpackDevServer = require('webpack-dev-server');
-var developerConfig = require('./webpack.dev.config');
-var productionConfig = require('./webpack.pro.config');
+var config = require('./webpack.config');
+// var developerConfig = require('./webpack.dev.config');
+// var productionConfig = require('./webpack.pro.config');
 
-console.log(`process.env.NODE_ENV = ${process.env.NODE_ENV}`)
+var NODE_ENV = process.env.NODE_ENV;
+var HOST = NODE_ENV === 'production'
+	? '0.0.0.0'
+	: 'localhost';
+var PORT = NODE_ENV === 'production'
+	? 3000
+	: 8063;
 
-if (process.env.NODE_ENV === 'production') {
-	return new WebpackDevServer(webpack(productionConfig), {
-				publicPath: productionConfig.output.publicPath,
-			}).listen(8063, '0.0.0.0', function (err, res){
-				if (err){
-					return console.log(err);
-				}
-				console.log(`Server ${process.env.NODE_ENV} listening at http://0.0.0.0:8063`)
-			});
-	} else {
-		return new WebpackDevServer(webpack(developerConfig), {
-			publicPath: developerConfig.output.publicPath,
-			hot: true,
-			historyApiFallback: true
-		}).listen(3000, '0.0.0.0', function (err, result){
-			if (err){
-				return console.log(err);
-			}
-			console.log('react-hot-loader Listening at http://0.0.0.0:3000/');
-		});
-}
+var webpackConfig = config(NODE_ENV, HOST, PORT);
+console.log(`Start node server for ${NODE_ENV}`)
+new WebpackDevServer(webpack( webpackConfig ), {
+	publicPath: webpackConfig.output.publicPath,
+}).listen(PORT, HOST, function(err, res){
+	if (err) {
+		console.log(err);
+	}
+	console.log(`now listening at http://${HOST}:${PORT}`)
+})
