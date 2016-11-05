@@ -17,7 +17,7 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 	  modulesDirectories: ['node_modules'],
 	  root: path.resolve('.')
 	};
-	
+
 	config.plugins = [
 		new webpack.DefinePlugin({
 			'NODE_ENV': JSON.stringify(nodeEnv)
@@ -85,8 +85,6 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 	}
 
 	if (PRODUCTION) {
-		config.entry.vendor = './src/vendor.js';
-
 	  config.module.loaders.push({
 	  	test: /\.scss$/, 
 	  	loader: ExtractTextPlugin.extract(
@@ -96,10 +94,6 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 
 		config.plugins.push(
 			new ExtractTextPlugin('styles.css'), 
-			new webpack.optimize.CommonsChunkPlugin({
-	      name: 'vendor',
-	      minChunks: Infinity
-    	}), 
     	new webpack.optimize.UglifyJsPlugin({
 	      mangle: true,
 	      compress: {
