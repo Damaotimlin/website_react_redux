@@ -1,9 +1,9 @@
+import { AppContainer } from 'react-hot-loader';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { browserHistory } from 'react-router';
-import { AppContainer } from 'react-hot-loader';
 import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
 import Helpers from './helpers/index';
@@ -16,19 +16,26 @@ const DEVELOPMENT = NODE_ENV === 'development';
 
 const INITIAL_STATE = {}
 
-let middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
-middlewares = compose(
-	middlewares, 
-	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+export const hotStore = () => {
+	let middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
+	
+	middlewares = compose(
+		middlewares, 
+		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	);
 
-const store = createStore(rootReducer, INITIAL_STATE, middlewares);
+	const store = createStore(rootReducer, INITIAL_STATE, middlewares);
+	
+	if (module.hot) {
+		module.hot.accept('./reducers/index', () => {
+			store.replaceReducer(require('./reducers/index').default);
+		})
+	};
+	return store;
+}
 
-if (module.hot) {
-	module.hot.accept('./reducers/index', () => {
-		store.replaceReducer(require('./reducers/index').default);
-	})
-};
+const store = hotStore();
+Helpers.cLog(['store = hotStore()=>', store]);
 
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 
@@ -48,7 +55,7 @@ if (module.hot) {
 	});
 };
 
-// init routing and App
+// init routing App
 render(Root);
 
 if (DEVELOPMENT) {
