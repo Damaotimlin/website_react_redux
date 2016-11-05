@@ -40,7 +40,7 @@ Helpers.cLog(['store = hotStore()=>', store]);
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 
 const render = Root => {
-	Helpers.cLog(['main render() called'])
+	Helpers.cLog(['main render() called', Root]);
 	ReactDOM.render(
 		<AppContainer>
 			<Root history={syncedHistory} store={store} />
