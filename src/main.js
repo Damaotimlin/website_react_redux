@@ -12,9 +12,12 @@ import rootReducer from './reducers/index';
 import Root from './components/root';
 import '../style/styles.scss';
 
-const DEVELOPMENT = NODE_ENV === 'development';
-
 const INITIAL_STATE = {}
+
+Helpers.cLog([
+	'Welcome to Dayeasier International', 
+	'For more details please contact with us at', 
+	'Tele : 04-2313-6598'], 'all');
 
 export const hotStore = () => {
 	let middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
@@ -35,12 +38,12 @@ export const hotStore = () => {
 }
 
 const store = hotStore();
-Helpers.cLog(['store = hotStore()=>', store]);
+Helpers.cLog(['store = hotStore()=>', store], 'development');
 
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 
 const render = Root => {
-	Helpers.cLog(['main render() called', Root]);
+	Helpers.cLog(['main render() called', Root], 'development');
 	ReactDOM.render(
 		<AppContainer>
 			<Root history={syncedHistory} store={store} />
@@ -58,14 +61,12 @@ if (module.hot) {
 // init routing App
 render(Root);
 
-if (DEVELOPMENT) {
-	Helpers.cLog([
-		'store.getState() =>',
-		store.getState(),
-		'store.dispatch =>',
-		store.dispatch
-	])
-}
+Helpers.cLog([
+	'store.getState() =>',
+	store.getState(),
+	'store.dispatch =>',
+	store.dispatch
+], 'development')
 
 
 

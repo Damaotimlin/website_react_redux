@@ -6,7 +6,7 @@ import Helpers from '../helpers/index';
 
 export default function Root({ history, store }){
 	
-	Helpers.cLog(['Root render calls=>', store, history, 'routes =>', getRoutes(store.getState)]);
+	Helpers.cLog(['Root render calls=>', store, history, 'routes =>', getRoutes(store.getState)], 'development');
 	
 	return (
 		<Provider store={store}>
