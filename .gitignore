@@ -4,6 +4,7 @@
 # **/node_modules/
 target/
 tmp/
+**/node_modules/
 
 #---------------------------------
 # Environment
