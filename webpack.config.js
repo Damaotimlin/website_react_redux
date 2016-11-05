@@ -17,23 +17,29 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 	  modulesDirectories: ['node_modules'],
 	  root: path.resolve('.')
 	};
+	
 	config.plugins = [
 		new webpack.DefinePlugin({
-		'process.env.NODE_ENV': nodeEnv
+			'NODE_ENV': JSON.stringify(nodeEnv)
 		})
 	];
+
+	config.output = {
+		filename: '[name].js',
+		path: path.resolve('./dist'),
+		publicPath: '/'
+	};
 
 	config.sassLoader = {
 		outputStyle: 'compressed',
 	  precision: 10,
 	  sourceComments: false
 	};
-
-	config.output = {
-		filename: 'bundle.js',
-		path: path.resolve('./dist'),
-		publicPath: '/'
-	};
+	
+	// fetch on-line lib can_i_use and add into
+	config.postcss = [ 
+		autoprefixer({ browers: ['last 3 versions'] })
+	]
 	
 	config.module = {
 		loaders: []
@@ -49,19 +55,19 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 		config.devtool = 'eval';
 
 		config.entry = {
-			main: ['./src/index.js']
+			bundle: ['./src/index.js']
 		};
 	}
 
 	if (DEVELOPMENT) {
-		config.entry.main.unshift(
+		config.entry.bundle.unshift(
 			`webpack-dev-server/client?http://${host}:${port}`,
 			'webpack/hot/only-dev-server'
 		);
 
 		config.module.loaders.push({
 			test: /\.scss$/, 
-			loader: 'style!css!postcss!sass'
+			loaders: ['style', 'css', 'postcss', 'sass']
 		});
 
 		config.plugins.push(
@@ -73,7 +79,8 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 	    historyApiFallback: true,
 	    host: host,
 	    port: port,
-	    hot: true
+	    hot: true,
+	    colors: true
 		}
 	}
 
@@ -110,7 +117,7 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 		config.devtool = 'inline-source-map';
 		config.module.loaders.push({
 			test: /\.scss$/, 
-			loader: 'style!css!postcss!sass'
+			loaders: ['style', 'css', 'postcss', 'sass']
 		})
 	}
 	return config

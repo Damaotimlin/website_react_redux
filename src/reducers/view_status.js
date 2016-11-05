@@ -1,4 +1,4 @@
-import { createReducer } from '../helpers/create_reducer';
+import Helpers from '../helpers/index';
 import { 
 	VIEW_LOADING 
 } from '../actions/index';
@@ -17,7 +17,7 @@ const INITIAL_STATE = { loading: false };
 // 			return state;
 // 	}
 // }
-export default createReducer(INITIAL_STATE, {
+export default Helpers.createReducer(INITIAL_STATE, {
 	[VIEW_LOADING](state, { loading }){
 		return { ...state, loading }
 	}

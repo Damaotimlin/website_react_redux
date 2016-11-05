@@ -1,14 +1,14 @@
 import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import { getRoute } from '../routes';
+import { getRoutes } from '../routes';
 
 export default function Root({ history, store }){
 	return (
 		<Provider store={store}>
 			<Router 
 				history={history}
-				routes={getRoute(store.getState)} />
+				routes={getRoutes(store.getState)} />
 		</Provider>
 	);
 }

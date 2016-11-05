@@ -6,11 +6,13 @@ import { browserHistory } from 'react-router';
 import { AppContainer } from 'react-hot-loader';
 import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
+import Helpers from './helpers/index';
 
-import { initAuth } from './core/auth/index';
 import rootReducer from './reducers/index';
 import Root from './components/root';
-import '../style/style.css';
+import '../style/styles.scss';
+
+const DEVELOPMENT = NODE_ENV === 'development';
 
 const INITIAL_STATE = {}
 
@@ -35,7 +37,7 @@ const render = Root => {
 		<AppContainer>
 			<Root history={syncedHistory} store={store} />
 		</AppContainer>,
-		document.querySelector('.container')
+		document.getElementById('root')
 	);
 }
 
@@ -45,14 +47,15 @@ if (module.hot) {
 	});
 };
 
-console.log('store.getState() =>');
-console.log(store.getState());
-console.log('store.dispatch =>');
-console.log(store.dispatch)
+if (DEVELOPMENT) {
+	Helpers.cLog([
+		'store.getState() =>',
+		store.getState(),
+		'store.dispatch =>',
+		store.dispatch
+	])
+}
 
-// initAuth(store.dispatch)
-// 	.then(() => render(Root))
-// 	.catch(err => console.log(err));
 
 
 
