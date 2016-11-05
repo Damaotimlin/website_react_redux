@@ -33,6 +33,7 @@ if (module.hot) {
 const syncedHistory = syncHistoryWithStore(browserHistory, store);
 
 const render = Root => {
+	Helpers.cLog(['main render() called'])
 	ReactDOM.render(
 		<AppContainer>
 			<Root history={syncedHistory} store={store} />
@@ -46,6 +47,9 @@ if (module.hot) {
 		render(require('./components/root').default);
 	});
 };
+
+// init routing and App
+render(Root);
 
 if (DEVELOPMENT) {
 	Helpers.cLog([

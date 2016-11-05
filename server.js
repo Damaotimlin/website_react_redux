@@ -1,10 +1,7 @@
-// Work for react-hot-loader
 var webpack = require('webpack');
 var dotenv = require('dotenv').config();
 var WebpackDevServer = require('webpack-dev-server');
 var config = require('./webpack.config');
-// var developerConfig = require('./webpack.dev.config');
-// var productionConfig = require('./webpack.pro.config');
 
 var NODE_ENV = process.env.NODE_ENV;
 var HOST = NODE_ENV === 'production'

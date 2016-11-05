@@ -25,7 +25,7 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 	];
 
 	config.output = {
-		filename: '[name].js',
+		filename: 'bundle.js',
 		path: path.resolve('./dist'),
 		publicPath: '/'
 	};
@@ -55,7 +55,7 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 		config.devtool = 'eval';
 
 		config.entry = {
-			bundle: ['./src/index.js']
+			bundle: ['./src/main.js']
 		};
 	}
 
