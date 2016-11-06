@@ -2,18 +2,23 @@ import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { paths } from '../routes';
 import Header from './header'
-import Helpers from '../helpers/index';
+import Helpers from '../helpers';
 
 import LoadingHandler from './loading_handler';
 
-export default class App extends Component {
+export class App extends Component {
 	static contextTypes = {
 		router: React.PropTypes.object.isRequired
 	};
 
 	static propTypes = {
-		childern: PropTypes.object.isRequired
+		children: PropTypes.object.isRequired
 	};
+
+  componentWillReceiveProps() {
+    const { router } = this.context;
+    Helpers.cLog(['App::router=>', router])
+  }
 
   render() {
     return (
@@ -21,8 +26,12 @@ export default class App extends Component {
       	<Header />
         <LoadingHandler />
       	<h1>Welcome to Dayeasier. ！網站架構中！</h1>
-      	{this.props.children}
+      	<main className="main">{this.props.children}</main>
       </div>
     );
   }
 }
+
+// export default connect(
+//   state = 
+// )

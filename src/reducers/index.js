@@ -7,7 +7,6 @@ import UserStatusReducer from './user_status';
 // import redux-form and grab reducer property and set it as variable formReducer
 
 const rootReducer = combineReducers({
-  // Loading status
   routing: routerReducer,
   viewStatus: ViewStatusReducer,
   userStatus: UserStatusReducer,

@@ -1,15 +1,23 @@
-import { AppContainer } from 'react-hot-loader';
+//============================================================
+// Lib
+//------------------------------------------------------------
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux';
+import { hashHistory } from 'react-router';
+import { AppContainer } from 'react-hot-loader';
 import { syncHistoryWithStore } from 'react-router-redux';
-import { browserHistory } from 'react-router';
+import { createStore, applyMiddleware, compose } from 'redux';
+//============================================================
+// Middlewares
+//------------------------------------------------------------
 import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
-import Helpers from './helpers/index';
-
-import rootReducer from './reducers/index';
+//============================================================
+// Custom Modules
+//------------------------------------------------------------
 import Root from './components/root';
+import rootReducer from './reducers';
+import Helpers from './helpers';
 import '../style/styles.scss';
 
 const INITIAL_STATE = {}
@@ -17,17 +25,25 @@ const INITIAL_STATE = {}
 Helpers.cLog([
 	'Welcome to Dayeasier International', 
 	'For more details please contact with us at', 
-	'Tele : 04-2313-6598'], 'all');
+	'Tele : 04-2313-6598'], 'production');
 
-export const hotStore = () => {
-	let middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
-	
-	middlewares = compose(
-		middlewares, 
-		window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+const hotStoreAndReduxDevWithoutProduction = () => {
+	const middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
+
+	const composeEnhancers = 
+		process.env.NODE_ENV != 'production' &&
+		typeof window === 'object' &&
+		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
+			? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+			: compose;
+
+	const store = createStore(
+		rootReducer, 
+		INITIAL_STATE,
+		composeEnhancers(
+			middlewares
+		)
 	);
-
-	const store = createStore(rootReducer, INITIAL_STATE, middlewares);
 	
 	if (module.hot) {
 		module.hot.accept('./reducers/index', () => {
@@ -37,16 +53,15 @@ export const hotStore = () => {
 	return store;
 }
 
-const store = hotStore();
-Helpers.cLog(['store = hotStore()=>', store], 'development');
-
-const syncedHistory = syncHistoryWithStore(browserHistory, store);
+const store = hotStoreAndReduxDevWithoutProduction();
+const history = syncHistoryWithStore(hashHistory, store);
 
 const render = Root => {
-	Helpers.cLog(['main render() called', Root], 'development');
+	// Helpers.cLog(['main.js render call=>', 'history=>', history, 'store=>', store], 'development');
+	Helpers.cLog(['main.js calls'])
 	ReactDOM.render(
 		<AppContainer>
-			<Root history={syncedHistory} store={store} />
+			<Root history={history} store={store} />
 		</AppContainer>,
 		document.getElementById('root')
 	);
@@ -58,15 +73,14 @@ if (module.hot) {
 	});
 };
 
-// init routing App
 render(Root);
 
-Helpers.cLog([
-	'store.getState() =>',
-	store.getState(),
-	'store.dispatch =>',
-	store.dispatch
-], 'development')
+// Helpers.cLog([
+// 	'store.getState() =>',
+// 	store.getState(),
+// 	'store.dispatch =>',
+// 	store.dispatch
+// ], 'development')
 
 
 

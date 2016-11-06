@@ -20,7 +20,7 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 
 	config.plugins = [
 		new webpack.DefinePlugin({
-			'NODE_ENV': JSON.stringify(nodeEnv)
+			'process.env.NODE_ENV': JSON.stringify(nodeEnv)
 		})
 	];
 
@@ -76,12 +76,13 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 		);
 		
 		config.devServer = {
-			contentBase: './src',
+			contentBase: './',
 	    historyApiFallback: true,
 	    host: host,
 	    port: port,
 	    hot: true,
-	    colors: true
+	    colors: true,
+	    inline: true
 		}
 	}
 

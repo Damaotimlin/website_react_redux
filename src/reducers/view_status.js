@@ -1,4 +1,4 @@
-import Helpers from '../helpers/index';
+import Helpers from '../helpers';
 import { 
 	VIEW_LOADING 
 } from '../actions/index';

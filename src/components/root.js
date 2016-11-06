@@ -1,23 +1,22 @@
 import React, { PropTypes } from 'react';
+import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import { getRoutes } from '../routes';
-import Helpers from '../helpers/index';
+import routes from '../routes';
+import Helpers from '../helpers';
 
 export default function Root({ history, store }){
 	
-	Helpers.cLog(['Root render calls=>', store, history, 'routes =>', getRoutes(store.getState)], 'development');
+	Helpers.cLog(['Root render calls by main.js', 'store=>', store, 'history=>', history, 'routes =>', routes], 'development');
 	
 	return (
 		<Provider store={store}>
-			<Router 
-				history={history}
-				routes={getRoutes(store.getState)} />
+			<Router history={history} routes={routes}/>
 		</Provider>
 	);
 }
 
 Root.propTypes = {
 	history: PropTypes.object.isRequired,
-	store: PropTypes.object.isRequired
+	store: PropTypes.object.isRequired,
 };
