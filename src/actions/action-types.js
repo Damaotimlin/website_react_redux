@@ -3,8 +3,10 @@
 //-----------------------------------------------------------------
 
 
-// View States Properties
+// View States
 export const VIEW_LOADING = 'VIEW_LOADING';
 
-// User Status Properties
+// User Status
 
+// Navbar Status
+export const NAVBAR_ITEM = 'NAVBAR_ITEM';

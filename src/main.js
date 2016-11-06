@@ -63,7 +63,7 @@ const render = Root => {
 		<AppContainer>
 			<Root history={history} store={store} />
 		</AppContainer>,
-		document.getElementById('root')
+		document.querySelector('.container-fluid')
 	);
 }
 

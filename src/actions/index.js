@@ -1,2 +1,3 @@
-export * from './action-types';
+import handelNavbarClick from './handle_navbar_click';
 
+export * from './action-types';

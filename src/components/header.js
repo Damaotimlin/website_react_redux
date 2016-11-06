@@ -1,9 +1,13 @@
 import React, { propTypes } from 'react';
+import { NavBar } from '../containers/nav_bar';
 
-export default function Header(){
+const Header = () => {
 	return (
-		<header className="">
-				<h3 className="">Header</h3>
+		<header className="col-md-12">
+				<img 
+						 className="pull-left col-xs-4"/>
+				<NavBar/>
 		</header>
 	)
 }
+export default Header

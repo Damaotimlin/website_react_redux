@@ -5,7 +5,7 @@ import { Router } from 'react-router';
 import routes from '../routes';
 import Helpers from '../helpers';
 
-export default function Root({ history, store }){
+const Root = ({ history, store }) => {
 	
 	Helpers.cLog(['Root render calls by main.js', 'store=>', store, 'history=>', history, 'routes =>', routes], 'development');
 	
@@ -20,3 +20,5 @@ Root.propTypes = {
 	history: PropTypes.object.isRequired,
 	store: PropTypes.object.isRequired,
 };
+
+export default Root

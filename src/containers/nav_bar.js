@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { handleNavClick } from '../actions'
 
 export class NavBar extends Component {
+
+	handleNavClick = () => {
+		
+	}
 	
 	render = () => {
 		return (
-			<div>Here is a nav bar</div>
+			<nav className="navbar navbar-light bg-faded">
+				<a className="navbar-brand">
+					<img src="/src/images/dayeasier_logo.png" alt=""
+							 width="236" height="62"/>
+				</a>
+				<ul className="nav navbar-nav">
+					<li className="nav-item">
+						<a onClick={this.handleNavClick.bind(this)} 
+							 className="nav-link">About</a>
+					</li>
+				</ul>
+			</nav>
 		)
 	}
 }
 
+export default connect(
+
+)
