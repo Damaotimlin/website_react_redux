@@ -12,7 +12,7 @@
 // 			return state;
 //   }
 //
-//	AFTER: Computed property names, ES6
+//	AFTER: Object initializer Computed property names, ES6
 //  createReducer(INITIAL_STATE, {
 //  	[SOME_CASE] (state, { payloadName }){
 // 	 		return { ...state, payloadName }
@@ -22,9 +22,20 @@
 // 		}
 // 	})
 //--------------------------------------------------------
-export const createReducer = (INITIAL_STATE = {}, actionMap = {}) => {
+export const createReducers = (INITIAL_STATE = {}, actionMap = {}) => {
+
+	console.log('createReducer fired!')
+	console.log('createReducer\'s actionMap=>')
+	console.log(actionMap)
 	return (state = INITIAL_STATE, action) => {
-		const mapper = actionMap[action.type]
+		let actiont = action
+		console.log(`createReducers\'s ${actiont} =>`)
+		console.log(actiont)
+		const mapper = actionMap[actiont];
+		console.log('createReducers\'s mapper =>')
+		console.log(mapper)
+		console.log('createReducers\'s state =>')
+		console.log(state)
 		return mapper ? mapper(state, action) : state
 	}
 };

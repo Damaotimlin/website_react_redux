@@ -1,8 +1,11 @@
-import { createReducer } from './create_reducer';
+import { createDispatchers, activeAction } from './create_dispatchers';
+import { createReducers } from './create_reducers';
 import { cLog } from './console_log';
 
 const Helpers = {
-	createReducer,
+	createDispatchers,
+	createReducers,
+	activeAction,
 	cLog
 }
 

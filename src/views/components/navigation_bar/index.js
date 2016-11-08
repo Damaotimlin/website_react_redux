@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { handleNavClick } from '../actions'
 
-export class NavBar extends Component {
+export class NavigationBar extends Component {
 
 	handleNavClick = () => {
 		
@@ -26,7 +25,3 @@ export class NavBar extends Component {
 		)
 	}
 }
-
-export default connect(
-
-)

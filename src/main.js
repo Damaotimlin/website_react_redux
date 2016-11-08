@@ -10,15 +10,15 @@ import { createStore, applyMiddleware, compose } from 'redux';
 //============================================================
 // Middlewares
 //------------------------------------------------------------
-import ReduxPromise from 'redux-promise';
 import ReduxThunk from 'redux-thunk';
+import ReduxPromise from 'redux-promise';
 //============================================================
 // Custom Modules
 //------------------------------------------------------------
-import Root from './components/root';
-import rootReducer from './reducers';
+import Root from './views/root';
 import Helpers from './helpers';
-import '../style/styles.scss';
+import './views/styles/styles.scss';
+import rootReducer from './core/reducers';
 
 const INITIAL_STATE = {}
 
@@ -28,7 +28,7 @@ Helpers.cLog([
 	'Tele : 04-2313-6598'], 'production');
 
 const hotStoreAndReduxDevWithoutProduction = () => {
-	const middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
+	let middlewares = applyMiddleware(ReduxPromise, ReduxThunk);
 
 	const composeEnhancers = 
 		process.env.NODE_ENV != 'production' &&
@@ -36,20 +36,29 @@ const hotStoreAndReduxDevWithoutProduction = () => {
 		window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ 
 			? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 			: compose;
-
+			
 	const store = createStore(
 		rootReducer, 
-		INITIAL_STATE,
 		composeEnhancers(
 			middlewares
 		)
 	);
-	
+	// middlewares = compose(
+	// 	middlewares,
+	// 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+	// );	
+	// let store = createStore(
+	// 	rootReducer,
+	// 	INITIAL_STATE,
+	// 	middlewares
+	// )
+
 	if (module.hot) {
-		module.hot.accept('./reducers/index', () => {
-			store.replaceReducer(require('./reducers/index').default);
+		module.hot.accept('./core/reducers', () => {
+			store.replaceReducer(require('./core/reducers').default);
 		})
 	};
+
 	return store;
 }
 
@@ -68,8 +77,8 @@ const render = Root => {
 }
 
 if (module.hot) {
-	module.hot.accept('./components/root', () => {
-		render(require('./components/root').default);
+	module.hot.accept('./views/root', () => {
+		render(require('./views/root').default);
 	});
 };
 
