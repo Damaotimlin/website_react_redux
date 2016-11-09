@@ -1,31 +1,38 @@
 import React, { Component, PropTypes } from 'react';
-import { createSelector } from 'reselect';
 import { connect } from 'react-redux';
-import Helpers from '../helpers';
+import { cLog } from '../helpers';
 
-import { getLoading, loadingActions } from '../core/loading';
+import { loadingStart, loadingComplete } from '../core/loading/actions';
 import LoadingView from './components/loading';
 import Header from './components/header'
 
 class App extends Component {
 	static contextTypes = {
-		router: React.PropTypes.object.isRequired
+		router: PropTypes.object.isRequired,
+
 	};
 
 	static propTypes = {
-		children: PropTypes.object.isRequired
+		children: PropTypes.object.isRequired,
+    loadingStart: PropTypes.func.isRequired,
+    loadingComplete: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
 	};
 
   componentWillMount() {
-    loadingActions.start()
-    console.log('this.props.loading=>')
-    console.log(this.props.loading)
+    this.props.loadingStart();
+    cLog([
+      'this.props.loadingStart => ', this.props.loadingStart,
+      'this.props.isLoading =>', this.props.isLoading
+    ]);
   }
 
   componentDidMount() {
-    loadingActions.finished()
-    console.log('this.props.loading=>')
-    console.log(this.props.loading)
+    this.props.loadingComplete();
+    cLog([
+      'this.props.finished => ', this.props.loadingComplete,
+      'this.props.isLoading =>', this.props.isLoading
+    ]);
   }
 
 
@@ -38,7 +45,7 @@ class App extends Component {
     return (
       <div>
       	<Header />
-        <LoadingView loading={this.props.loading}/>
+        <LoadingView loading={this.props.isLoading}/>
       	<h1>Welcome to Dayeasier. ！網站架構中！</h1>
       	<main className="main">{this.props.children}</main>
       </div>
@@ -49,22 +56,8 @@ class App extends Component {
 //=====================================
 //  CONNECT
 //-------------------------------------
-// const mapStateToProps = createSelector(
-//   getLoading,
-//   (loadingView) => ({
-//     loadingView
-//   })
-// )
-
-
-// const mapDispatchToProps = Object.assign(
-//   {},
-//   loadingActions
-// )
-
 export default connect(
-  state => ({
-    loading: state.loadingView.loading
-  }),
+  state => ({ isLoading: state.loadingView.isLoading }),
+  { loadingStart, loadingComplete }
 )(App)
 

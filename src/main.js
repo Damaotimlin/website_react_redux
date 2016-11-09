@@ -16,13 +16,13 @@ import ReduxPromise from 'redux-promise';
 // Custom Modules
 //------------------------------------------------------------
 import Root from './views/root';
-import Helpers from './helpers';
+import { cLog } from './helpers';
 import './views/styles/styles.scss';
 import rootReducer from './core/reducers';
 
 const INITIAL_STATE = {}
 
-Helpers.cLog([
+cLog([
 	'Welcome to Dayeasier International', 
 	'For more details please contact with us at', 
 	'Tele : 04-2313-6598'], 'production');
@@ -43,15 +43,6 @@ const hotStoreAndReduxDevWithoutProduction = () => {
 			middlewares
 		)
 	);
-	// middlewares = compose(
-	// 	middlewares,
-	// 	window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-	// );	
-	// let store = createStore(
-	// 	rootReducer,
-	// 	INITIAL_STATE,
-	// 	middlewares
-	// )
 
 	if (module.hot) {
 		module.hot.accept('./core/reducers', () => {
@@ -66,8 +57,7 @@ const store = hotStoreAndReduxDevWithoutProduction();
 const history = syncHistoryWithStore(hashHistory, store);
 
 const render = Root => {
-	// Helpers.cLog(['main.js render call=>', 'history=>', history, 'store=>', store], 'development');
-	Helpers.cLog(['main.js calls'])
+	// cLog(['main.js render call=>', 'history=>', history, 'store=>', store], 'development');
 	ReactDOM.render(
 		<AppContainer>
 			<Root history={history} store={store} />
@@ -84,7 +74,7 @@ if (module.hot) {
 
 render(Root);
 
-// Helpers.cLog([
+// cLog([
 // 	'store.getState() =>',
 // 	store.getState(),
 // 	'store.dispatch =>',

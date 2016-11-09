@@ -1,39 +1,34 @@
-import Helpers from '../../helpers'
 import {
-	LOADING_START,
-	LOADING_FINISHED,
-	LOADING_ERROR
+	START,
+	COMPLETE,
+	ERROR
 } from './action-types';
 
-export const start = () => {
-	// return {
-	// 	type: LOADING_START,
-	// 	loading: true
-	// }
-	Helpers.activeAction({
-		LOADING_START: { loading: true }
-	})
-	dispatch => {	
-		Helpers.createDispatchers({
-			LOADING_START: { loading: true }
+export function loadingStart(){
+	return (dispatch) => {
+		dispatch({		
+			type: START,
+			isLoading: true
+		});
+
+		// setTimeout(error({error: 'ERROR:Loading Start Timeout @loadion/action'}), 1000)
+	}
+};
+
+export function loadingComplete(){
+	return (dispatch) => {
+		dispatch({
+			type: COMPLETE,
+			isLoading: false
 		});
 	}
 };
 
-export const finished = () => {
-	// return {
-	// 	type: LOADING_START,
-	// 	loading: false
-	// }
-	Helpers.activeAction({
-		LOADING_FINISHED: { loading: false }
-	})
-};
-
-export const error = error => {
+function loadingError(error){
 	dispatch => {	
-		Helpers.createDispatchers({
-			LOADING_ERROR: error
+		dispatch({
+			type:ERROR,
+			error
 		});
 	}
 };

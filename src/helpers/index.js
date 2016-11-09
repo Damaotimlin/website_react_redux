@@ -1,12 +1,7 @@
-import { createDispatchers, activeAction } from './create_dispatchers';
-import { createReducers } from './create_reducers';
-import { cLog } from './console_log';
+import cLog from './console_log'
+import createReducer from './create_reducer'
 
-const Helpers = {
-	createDispatchers,
-	createReducers,
-	activeAction,
-	cLog
+export {
+	cLog,
+	createReducer
 }
-
-export default Helpers

@@ -1,42 +1,20 @@
-import Helpers from '../../helpers';
+import { createReducer } from '../../helpers';
 import {
-	LOADING_START,
-	LOADING_FINISHED
+	START,
+	COMPLETE
 } from './action-types';
 
 
-const INITIAL_STATE = { loading: true };
+const INITIAL_STATE = { isLoading: true };
 
-// export const loadingReducer = Helpers.createReducers(INITIAL_STATE, {
-// 	[LOADING_START](state, { loading }){
-// 		return { ...state, loading }
-// 	},
+export default createReducer(INITIAL_STATE, {
+	[START](state, { isLoading }){
+		return { ...state, isLoading }
+	},
 
-// 	[LOADING_FINISHED](state, { loading }){
-// 		return { ...state, loading }
-// 	}
-// })
-
-export function loadingReducer(state = INITIAL_STATE, action){
-	Helpers.cLog([
-	'loadingReducer\'s action =>',
-	action,
-	'loadingReducer\'s action.type =>',
-	action.type
-	])
-	switch(action.type){
-		case LOADING_START:
-			console.log(action.type)
-			return {
-				...state,
-				loading: action.loading
-			}
-		case LOADING_FINISHED:
-			return {
-				...state,
-				loading: action.loading
-			}
-		default:
-			return state;
+	[COMPLETE](state, { isLoading }){
+		return { ...state, isLoading }
 	}
-}
+})
+
+// export default loadingReducer;

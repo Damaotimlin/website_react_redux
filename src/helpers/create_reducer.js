@@ -22,20 +22,18 @@
 // 		}
 // 	})
 //--------------------------------------------------------
-export const createReducers = (INITIAL_STATE = {}, actionMap = {}) => {
-
-	console.log('createReducer fired!')
-	console.log('createReducer\'s actionMap=>')
-	console.log(actionMap)
+export default function createReducer (INITIAL_STATE = {}, actionMap = {}){
+	// console.log('createReducer fired!')
+	// console.log('createReducer\'s actionMap=>')
+	// console.log(actionMap)
 	return (state = INITIAL_STATE, action) => {
-		let actiont = action
-		console.log(`createReducers\'s ${actiont} =>`)
-		console.log(actiont)
-		const mapper = actionMap[actiont];
-		console.log('createReducers\'s mapper =>')
-		console.log(mapper)
-		console.log('createReducers\'s state =>')
-		console.log(state)
+		// console.log(`createReducers\'s ${action.type} =>`)
+		// console.log(action.type)
+		const mapper = actionMap[action.type];
+		// console.log('createReducers\'s mapper =>')
+		// console.log(mapper)
+		// console.log('createReducers\'s state =>')
+		// console.log(state)
 		return mapper ? mapper(state, action) : state
 	}
 };

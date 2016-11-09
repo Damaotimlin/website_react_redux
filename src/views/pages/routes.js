@@ -1,14 +1,15 @@
 //============================================================
 // Components
 //------------------------------------------------------------
-import ShowRoom from './components/show_room';
-import NavigationBar from './components/navigation_bar';
+// import ShowRoom from './components/show_room';
+// import NavigationBar from './components/navigation_bar';
 
 //============================================================
 // Containers
 //------------------------------------------------------------
-import App from './app';
-import { notFound } from './pages/404'
+import App from '../app';
+import Home from './home'
+import NotFound from './404'
 
 
 //============================================================
@@ -24,10 +25,9 @@ const rp = route_paths;
 export const routes = {
 	path: rp.ROOT,
 	component: App,
-	indexRoute: { component: ShowRoom },
+	indexRoute: { component: Home },
 	childRoutes: [
-		{ path: rp.ABOUT, component: ShowRoom },
-		{ path: rp.NOT_FOUND, component: notFound },
+		{ path: rp.NOT_FOUND, component: NotFound },
 	]
 };
 
