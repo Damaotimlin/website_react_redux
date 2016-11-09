@@ -6,9 +6,14 @@ import loadingReducer from './loading/reducer';
 
 // import redux-form and grab reducer property and set it as variable formReducer
 
+
+
+
+
+
 const rootReducer = combineReducers({
   routing: routerReducer,
-  loadingView: loadingReducer
+  loadingStatus: loadingReducer,
 });
 
-export default rootReducer;
+export default rootReducer

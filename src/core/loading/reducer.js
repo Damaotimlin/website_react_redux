@@ -1,7 +1,8 @@
 import { createReducer } from '../../helpers';
 import {
 	START,
-	COMPLETE
+	COMPLETE,
+	PROGRESS
 } from './action-types';
 
 
@@ -14,7 +15,9 @@ export default createReducer(INITIAL_STATE, {
 
 	[COMPLETE](state, { isLoading }){
 		return { ...state, isLoading }
+	},
+
+	[PROGRESS](state, { progress }){
+		return { ...state, progress }
 	}
 })
-
-// export default loadingReducer;

@@ -1,7 +1,8 @@
 import {
 	START,
 	COMPLETE,
-	ERROR
+	ERROR,
+	PROGRESS
 } from './action-types';
 
 export function loadingStart(){
@@ -22,6 +23,15 @@ export function loadingComplete(){
 			isLoading: false
 		});
 	}
+};
+
+export const getLoadingProgress = () => {
+	return dispatch => {
+    dispatch({
+    	type: PROGRESS,
+    	progress: progress
+		})
+  }
 };
 
 function loadingError(error){

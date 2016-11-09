@@ -17,22 +17,15 @@ class App extends Component {
     loadingStart: PropTypes.func.isRequired,
     loadingComplete: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    loadingProgress: PropTypes.number,
 	};
 
   componentWillMount() {
     this.props.loadingStart();
-    cLog([
-      'this.props.loadingStart => ', this.props.loadingStart,
-      'this.props.isLoading =>', this.props.isLoading
-    ]);
   }
 
   componentDidMount() {
     this.props.loadingComplete();
-    cLog([
-      'this.props.finished => ', this.props.loadingComplete,
-      'this.props.isLoading =>', this.props.isLoading
-    ]);
   }
 
 
@@ -45,8 +38,8 @@ class App extends Component {
     return (
       <div>
       	<Header />
-        <LoadingView loading={this.props.isLoading}/>
-      	<h1>Welcome to Dayeasier. ！網站架構中！</h1>
+        <LoadingView 
+          loading={this.props.isLoading}/>
       	<main className="main">{this.props.children}</main>
       </div>
     );
@@ -57,7 +50,10 @@ class App extends Component {
 //  CONNECT
 //-------------------------------------
 export default connect(
-  state => ({ isLoading: state.loadingView.isLoading }),
+  state => ({ 
+    isLoading: state.loadingStatus.isLoading,
+    loadingProgress: state.loadingStatus.progress
+  }),
   { loadingStart, loadingComplete }
 )(App)
 
