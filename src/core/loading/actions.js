@@ -17,6 +17,7 @@ export function loadingStart(){
 };
 
 export function loadingComplete(){
+
 	return (dispatch) => {
 		dispatch({
 			type: COMPLETE,

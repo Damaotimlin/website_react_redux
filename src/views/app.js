@@ -3,8 +3,10 @@ import { connect } from 'react-redux';
 import { cLog } from '../helpers';
 
 import { loadingStart, loadingComplete } from '../core/loading/actions';
+import { burgerOnClicked } from '../core/navigation/actions'
 import LoadingView from './components/loading';
-import Header from './components/header'
+import Header from './components/header';
+import BurgerBtn from './components/burger_btn';
 
 class App extends Component {
 	static contextTypes = {
@@ -17,7 +19,9 @@ class App extends Component {
     loadingStart: PropTypes.func.isRequired,
     loadingComplete: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    burgerClicked: PropTypes.bool.isRequired,
     loadingProgress: PropTypes.number,
+    burgerOnClicked: PropTypes.func.isRequired
 	};
 
   componentWillMount() {
@@ -27,7 +31,6 @@ class App extends Component {
   componentDidMount() {
     this.props.loadingComplete();
   }
-
 
   // componentWillReceiveProps() {
   //   const { router } = this.context;
@@ -40,6 +43,9 @@ class App extends Component {
       	<Header />
         <LoadingView 
           loading={this.props.isLoading}/>
+        <BurgerBtn 
+          onClickAction={this.props.burgerOnClicked}
+          burgerClicked={this.props.burgerClicked}/>
       	<main className="main">{this.props.children}</main>
       </div>
     );
@@ -52,8 +58,9 @@ class App extends Component {
 export default connect(
   state => ({ 
     isLoading: state.loadingStatus.isLoading,
-    loadingProgress: state.loadingStatus.progress
+    loadingProgress: state.loadingStatus.progress,
+    burgerClicked: state.navigation.burgerClicked,
   }),
-  { loadingStart, loadingComplete }
+  { loadingStart, loadingComplete, burgerOnClicked }
 )(App)
 

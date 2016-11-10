@@ -4,14 +4,14 @@ import {
 	BURGER_BTN_CLICKED
 } from './action-types';
 
-const INITIAL_STATE = { isClicked: false, navItem: {} };
+const INITIAL_STATE = { burgerClicked: false, navItem: {} };
 
 export default createReducer(INITIAL_STATE, {
 	[NAVBAR_ITEM](state, { navItem }){
 		return { ...state, navItem }
 	},
 
-	[BURGER_BTN_CLICKED](state, { isClicked }){
-		return { ...state, isClicked }
+	[BURGER_BTN_CLICKED](state, { burgerClicked }){
+		return { ...state, burgerClicked }
 	},
 })
