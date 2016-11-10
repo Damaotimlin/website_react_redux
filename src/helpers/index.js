@@ -1,9 +1,7 @@
-import { createReducer } from './create_reducer';
-import { cLog } from './console_log';
+import cLog from './console_log'
+import createReducer from './create_reducer'
 
-const Helpers = {
-	createReducer,
-	cLog
+export {
+	cLog,
+	createReducer
 }
-
-export default Helpers

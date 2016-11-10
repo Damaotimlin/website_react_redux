@@ -1,6 +1,7 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
+// var HtmlWebpackPlugin = require('html-webpack-plugin');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var webpackConfig = module.exports = function(nodeEnv, host, port){
@@ -26,7 +27,7 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 
 	config.output = {
 		filename: 'bundle.js',
-		path: path.resolve('./dist'),
+		path: path.resolve('./'),
 		publicPath: '/'
 	};
 
@@ -55,12 +56,12 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 		config.devtool = 'eval';
 
 		config.entry = {
-			bundle: ['./src/main.js']
+			main: ['./src/main.js']
 		};
 	}
 
 	if (DEVELOPMENT) {
-		config.entry.bundle.unshift(
+		config.entry.main.unshift(
 			'react-hot-loader/patch',
 			`webpack-dev-server/client?http://${host}:${port}`,
 			'webpack/hot/only-dev-server'
@@ -76,13 +77,12 @@ var webpackConfig = module.exports = function(nodeEnv, host, port){
 		);
 		
 		config.devServer = {
-			contentBase: './',
+			contentBase: './src',
 	    historyApiFallback: true,
 	    host: host,
 	    port: port,
+			publicPath: config.output.publicPath,
 	    hot: true,
-	    colors: true,
-	    inline: true
 		}
 	}
 

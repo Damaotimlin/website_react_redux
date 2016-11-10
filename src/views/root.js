@@ -2,12 +2,17 @@ import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Router } from 'react-router';
-import routes from '../routes';
-import Helpers from '../helpers';
+import routes from './pages/routes';
+import { cLog } from '../helpers';
 
 const Root = ({ history, store }) => {
 	
-	Helpers.cLog(['Root render calls by main.js', 'store=>', store, 'history=>', history, 'routes =>', routes], 'development');
+	cLog(['Root render calls by main.js', 
+		'store=>', store, 
+		'store.getState()=>', store.getState(), 
+		'history=>', history, 
+		'routes =>', routes], 
+		'mute');
 	
 	return (
 		<Provider store={store}>

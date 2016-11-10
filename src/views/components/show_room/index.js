@@ -7,10 +7,4 @@ export class ShowRoom extends Component {
 	}
 }
 
-
-// export default connect(
-// 	state => ({
-// 			loadingView: state.viewStatus.loading
-// 		}),
-// 	null
-// )(LoadingHandler)
+export default ShowRoom
