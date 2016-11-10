@@ -1,3 +1,4 @@
+import classNames from 'classNames';
 import React, { Component, PropTypes } from 'react';
 
 class BurgerBtn extends Component {
@@ -10,37 +11,30 @@ class BurgerBtn extends Component {
 
 	render(){		
 		console.log(`this.burgerClicked: ${this.props.burgerClicked}`)
-		if (!this.props.burgerClicked) {
-			return (
-				<div>
-					<button onClick={this.props.onClickAction}>Click Me</button>
-				</div>
-			)
-		}
-		
-	  return (
-	    <div>
-	    	<button 
-	    		className="c-hamburger c-hamburger--rot"
-	    		onClick={this.props.onClickAction}>
-				  <span>toggle menu</span>
+		return (
+			<div>
+				<button
+					className={classNames('c-hamburger', 'c-hamburger--rot', 
+															 {'is-active': this.props.burgerClicked})}
+					onClick={this.props.onClickAction.bind(this)}>
+					<span>hambagure</span>
 				</button>
-				<button 
-					className="c-hamburger c-hamburger--htx">
-				  <span>toggle menu</span>
+				<br/>
+				<button
+					className={classNames('c-hamburger', 'c-hamburger--htx',
+																{'is-active': this.props.burgerClicked})} 
+					onClick={this.props.onClickAction}>
+					<span>hambagure</span>
 				</button>
-
-				<button 
-					className="c-hamburger c-hamburger--htla">
-				  <span>toggle menu</span>
+				<br/>
+				<button
+					className={classNames('c-hamburger', 'c-hamburger--htra',
+																{'is-active': this.props.burgerClicked})} 
+					onClick={this.props.onClickAction}>
+					<span>hambagure</span>
 				</button>
-
-				<button 
-					className="c-hamburger c-hamburger--htra">
-				  <span>toggle menu</span>
-				</button>
-	    </div>
-	  );
+			</div>
+		)
 	}
 };
 

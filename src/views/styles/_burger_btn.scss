@@ -1,11 +1,20 @@
 .c-hamburger {
+	
+	$full_height: 84px;
+	$bar_height: 8px;	
+	$button-transistion-duration: 0.3s;
+
+	&:focus {
+	  outline: none; // disable select board
+	}
+
   display: block;
   position: relative;
   overflow: hidden;
   margin: 0;
   padding: 0;
-  width: 96px;
-  height: 96px;
+  width: $full_height;
+  height: $full_height;
   font-size: 0;
   text-indent: -9999px;
   appearance: none;
@@ -14,37 +23,130 @@
   border: none;
   cursor: pointer;
   transition: background 0.3s;
+	
+
+  span { // middle bar
+  	display: block;
+	  position: absolute;
+	  top: $full_height/2 - $bar_height/2;
+	  left: $full_height/7;
+	  right: $full_height/7;
+	  height: $bar_height;
+	  background: white;
+		&:before, &:after { // ::before on top, after at down
+			position: absolute;
+		  display: block;
+		  left: 0;
+		  width: 100%;
+		  height: $bar_height;
+		  background-color: #fff;
+		  content: "";
+		}
+		&:before {
+		  top: -$full_height/4;
+		}
+		&:after {
+		  bottom: -$full_height/4;
+		}
+	} 
+
+	&--rot {
+		&.is-active {
+		background-color: #166888;
+			span {
+				transform: rotate(90deg);
+			}
+		}
+	}
+
+	&--htx {
+		background-color: #ff3264;
+		span {
+			transition: background 0s 0s;
+		}
+		&:before, &:after {
+			transition-duration: $button-transistion-duration, $button-transistion-duration;
+  		transition-delay: $button-transistion-duration, $button-transistion-duration;
+		}
+		&:before {
+			transition-property: top, transform;
+		}
+		&:after {
+			transition-property: bottom, transform;
+		}
+		&.is-active {
+			background-color: #cb0032;
+			span {
+				background: none;
+				&:before {
+					top: 0;
+  				transform: rotate(45deg);
+				}
+				&:after {
+					bottom: 0;
+				  transform: rotate(-45deg);
+				}
+				&:before, &:after {
+					transition-delay: 0s, $button-transistion-duration;
+				}
+			}
+		}
+	}
+
+	&--htra {
+		background-color: #ff9650;
+		span {
+			transition: transform $button-transistion-duration;
+			&:before {
+				transform-origin: top left;
+  			transition: transform $button-transistion-duration, 
+						  			width 		$button-transistion-duration, 
+						  			top 			$button-transistion-duration;
+			}
+			&:after {
+				transform-origin: bottom left;
+			  transition: transform $button-transistion-duration, 
+									  width 		$button-transistion-duration, 
+									  bottom 		$button-transistion-duration;
+			}
+		}
+		&.is-active {
+			background-color: #e95d00;
+			span {
+				transform: rotate(180deg);
+				&:before, &:after {
+					width: 50%
+				} 
+				&:before {
+					top: 0;
+					transform: translateX(-8px) translateY(4px) rotate(-45deg);
+				}
+				&:after {
+					bottom: 0;
+					transform: translateX(-8px) translateY(-4px) rotate(45deg);
+				}
+			}
+		}
+	}
 }
 
-.c-hamburger:focus {
-  outline: none;
-}
+// (function() {
 
-.c-hamburger span {
-  display: block;
-  position: absolute;
-  top: 44px;
-  left: 18px;
-  right: 18px;
-  height: 8px;
-  background: white;
-}
+//   "use strict";
 
-.c-hamburger span::before,
-.c-hamburger span::after {
-  position: absolute;
-  display: block;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background-color: #fff;
-  content: "";
-}
+//   var toggles = document.querySelectorAll(".c-hamburger");
 
-.c-hamburger span::before {
-  top: -20px;
-}
+//   for (var i = toggles.length - 1; i >= 0; i--) {
+//     var toggle = toggles[i];
+//     toggleHandler(toggle);
+//   };
 
-.c-hamburger span::after {
-  bottom: -20px;
-}
+//   function toggleHandler(toggle) {
+//     toggle.addEventListener( "click", function(e) {
+//       e.preventDefault();
+//       (this.classList.contains("is-active") === true) ? this.classList.remove("is-active") : this.classList.add("is-active");
+//     });
+//   }
+
+// })();
+
